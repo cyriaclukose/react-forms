@@ -2,22 +2,61 @@
 import './App.css';
 import { useState } from 'react';
 function App() {
+  //multiple Inputs
+  const [inputs, setInputs] = useState({});
+  function handleChange(e) {
 
-  const [name,setName]=useState("");
- function handleFirstName(e){
+    const name = e.target.name;
+    let value;
+    if(name!=='favouriteFruits')
+    {
+       value = e.target.value;
+    }else
+    {
+      const options = [...e.target.selectedOptions];
+       value = options.map(option => option.value);
+    }
+    
+    
 
-    setName(e.target.value);
+    setInputs({ ...inputs, [name]: value })
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    alert(JSON.stringify(inputs));
   }
 
 
-   
   return (
     <div >
-      <h2>Learn</h2>
-      <form >
-      <label> Enter the firstName :
-       <input type="text" value={name} onChange={handleFirstName}/>
-      </label>
+      <h2>Learn Forms</h2>
+      <form onSubmit={handleSubmit}>
+        <label> Enter the firstName :
+          <input type="text" name="firstName" value={inputs.firstName || ""} onChange={handleChange} />
+        </label> <br />
+        <label> Enter the lastName :
+          <input type="text" name="lastName" value={inputs.lastName || ""} onChange={handleChange} />
+        </label><br />
+        <label> Enter the age :
+          <input type="number" name="age" value={inputs.age || 0} onChange={handleChange} />
+        </label> <br />
+        <label> Enter the notes :
+          <input type="textarea" name="notes" value={inputs.notes || ""} onChange={handleChange} />
+        </label> <br />
+        <label>
+          Enter the favourite fruit:
+
+          <select 
+          name="favouriteFruits" defaultValue={["orange","apple"]}
+           multiple={true} onChange={handleChange}>
+            <option value="banane">Banana</option>
+            <option value="orange">Orange</option>
+            <option value="apple">Apple</option>
+            <option value="pear">Pear</option>
+          </select>
+        </label>
+        <input type="submit" value="StoreData" />
       </form>
     </div>
   );

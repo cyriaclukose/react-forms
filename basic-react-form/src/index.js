@@ -3,11 +3,11 @@ import  ReactDOM  from 'react-dom/client';
 import App from "./App";
 
 
-const root =document.getElementById("root");
+const container =document.getElementById("root");
 
-const container=ReactDOM.createRoot(root);
+const root=ReactDOM.createRoot(container);
 
-container.render(
+root.render(
 
   <React.StrictMode>
     <App />
