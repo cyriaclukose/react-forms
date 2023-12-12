@@ -8,16 +8,14 @@ function App() {
 
     const name = e.target.name;
     let value;
-    if(name!=='favouriteFruits')
-    {
-       value = e.target.value;
-    }else
-    {
+    if (name !== 'favouriteFruits') {
+      value = e.target.value;
+    } else {
       const options = [...e.target.selectedOptions];
-       value = options.map(option => option.value);
+      value = options.map(option => option.value);
     }
-    
-    
+
+
 
     setInputs({ ...inputs, [name]: value })
   }
@@ -47,15 +45,42 @@ function App() {
         <label>
           Enter the favourite fruit:
 
-          <select 
-          name="favouriteFruits" defaultValue={["orange","apple"]}
-           multiple={true} onChange={handleChange}>
+          <select
+            name="favouriteFruits" defaultValue={["orange", "apple"]}
+            multiple={true} onChange={handleChange}>
             <option value="banane">Banana</option>
             <option value="orange">Orange</option>
             <option value="apple">Apple</option>
             <option value="pear">Pear</option>
           </select>
         </label>
+        <br/>
+
+        Select the Gender: <br/>
+        <label>
+          Male
+          <input type="radio" name="gender" value="male"
+
+            checked={'male' === inputs.gender}
+            onChange={handleChange} />
+        </label>
+        <br />
+
+        <label >Female
+          <input type="radio" name="gender" value="female"
+
+            checked={'female' === inputs.gender}
+
+            onChange={handleChange} />
+        </label>
+        <br />
+        <label> Other
+          <input type="radio" name="gender" value="other"
+            checked={'other' === inputs.gender}
+            onChange={handleChange} />
+
+        </label>
+        <br />
         <input type="submit" value="StoreData" />
       </form>
     </div>
